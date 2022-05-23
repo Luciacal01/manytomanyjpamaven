@@ -237,4 +237,22 @@ public class UtenteServiceImpl implements UtenteService {
 
 	}
 
+	public List<Utente> CercaUtentiCreatiAGiugno2021() throws Exception {
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			// uso l'injection per il dao
+			utenteDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			return utenteDAO.findAllCreatedAtGiugno2021();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
+	}
+
 }

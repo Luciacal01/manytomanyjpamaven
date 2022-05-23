@@ -1,5 +1,7 @@
 package it.manytomanyjpamaven.test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -40,7 +42,11 @@ public class ManyToManyTest {
 			// testRimuoviRuoloDaUtente(ruoloServiceInstance, utenteServiceInstance);
 			System.out.println("In tabella Utente ci sono " + utenteServiceInstance.listAll().size() + " elementi.");
 
-			//deleteRuolo(ruoloServiceInstance);
+			// deleteRuolo(ruoloServiceInstance);
+
+			testCercaUtentiDataCreazioneGiugno2021(utenteServiceInstance);
+
+			// testDeleteUtente(utenteServiceInstance);
 
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -188,5 +194,49 @@ public class ManyToManyTest {
 		System.out.println(".......testCancellaRuolo PASSED.........");
 
 	}
-	
+
+	public static void testDeleteUtente(UtenteService utenteServiceInstance) throws Exception {
+		System.out.println(".............testDeleteUtente inizio..........");
+		List<Utente> listaUtentiPresenti = utenteServiceInstance.listAll();
+		int size = listaUtentiPresenti.size();
+
+		utenteServiceInstance.rimuovi(listaUtentiPresenti.get(4).getId());
+		if (listaUtentiPresenti.size() == size)
+			throw new RuntimeException("test FAILED: l'elemento non è stato eliminato");
+
+		System.out.println(".............testDeleteUtente Passed..........");
+	}
+
+	public static void testCercaUtentiDataCreazioneGiugno2021(UtenteService utenteServiceInstance) throws Exception {
+		System.out.println("........testCercaUtentiDataCreazioneGiugno2021 inizio..........");
+
+		Utente utenteNuovo = new Utente("pippo.rossi", "xxx", "pippo", "rossi",
+				new SimpleDateFormat("dd-MM-yyyy").parse("10-06-2021"));
+		utenteServiceInstance.inserisciNuovo(utenteNuovo);
+		if (utenteNuovo.getId() == null)
+			throw new RuntimeException("testInserisciNuovoUtente fallito ");
+
+		Utente utenteNuovo1 = new Utente("verdisss", "ghk", "gianni", "verdi",
+				new SimpleDateFormat("dd-MM-yyyy").parse("30-06-2021"));
+		utenteServiceInstance.inserisciNuovo(utenteNuovo1);
+		if (utenteNuovo1.getId() == null)
+			throw new RuntimeException("testInserisciNuovoUtente fallito ");
+
+		List<Utente> listaUtentiCreatiAGiugno2021 = utenteServiceInstance.CercaUtentiCreatiAGiugno2021();
+
+		if (listaUtentiCreatiAGiugno2021.size() != 2)
+			throw new RuntimeException(
+					"testCercaUtentiDataCreazioneGiugno2021 FAILED, la ricerca non è andata a buon fine");
+
+		utenteServiceInstance.rimuovi(utenteNuovo.getId());
+		utenteServiceInstance.rimuovi(utenteNuovo1.getId());
+
+		System.out.println("........testCercaUtentiDataCreazioneGiugno2021 PASSED..........");
+	}
 }
+
+//utentiCreatiAGiugno2021
+//numeroDiUtentiAdmin
+//listaDiDescrizioniDistinteDeiRuoliConUtentiAssociati
+//listaDiUtentiConPasswordcConMenoDi8Caratteri
+//SeTraGliUtentiDisabilitatiAlmenoUnAdmin
