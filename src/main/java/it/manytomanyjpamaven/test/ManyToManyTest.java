@@ -286,6 +286,22 @@ public class ManyToManyTest {
 
 		System.out.println("..........testControllaSeTraGliUtentiDisabilitatiAlmenoUnAdmin PASSED..........");
 	}
+	
+	public static void testListaDiDescrizioniDistinteDeiRuoliConUtentiAssociati(RuoloService ruoloServiceInstance)
+			throws Exception {
+		System.out.println("..........testListaDiDescrizioniDistinteDeiRuoliConUtentiAssociati inizio.......");
+
+		List<String> listaDescrizioni = ruoloServiceInstance.listaDiDescrizioniDistinteDeiRuoliConUtentiAssociati();
+
+		for (String stringItem : listaDescrizioni) {
+			System.out.println(stringItem);
+		}
+
+		if (listaDescrizioni.size() != 1)
+			throw new RuntimeException("testListaDiDescrizioniDistinteDeiRuoliConUtentiAssociati FAILED");
+
+		System.out.println("testListaDiDescrizioniDistinteDeiRuoliConUtentiAssociati PASSED");
+	}
 }
 
 //utentiCreatiAGiugno2021

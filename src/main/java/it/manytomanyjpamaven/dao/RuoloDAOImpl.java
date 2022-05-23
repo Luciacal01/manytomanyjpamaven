@@ -68,4 +68,10 @@ public class RuoloDAOImpl implements RuoloDAO {
 		return query.getResultStream().findFirst().orElse(null);
 	}
 
+	public List<String> findAllByDescrizioniRuoliConUtentiAssociati() throws Exception {
+		String sqlQuery = "select distinct r.descrizione from ruolo r inner join utente_ruolo ur on r.id=ur.ruolo_id";
+		javax.persistence.Query q = entityManager.createNativeQuery(sqlQuery);
+		return q.getResultList();
+	}
+
 }
