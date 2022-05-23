@@ -274,6 +274,18 @@ public class ManyToManyTest {
 
 		System.out.println("........testListaDiUtentiConPasswordcConMenoDi8Caratteri PASSED........");
 	}
+	
+	public static void testControllaSeTraGliUtentiDisabilitatiAlmenoUnAdmin(UtenteService utenteServiceInstance)
+			throws Exception {
+		System.out.println("..........testControllaSeTraGliUtentiDisabilitatiAlmenoUnAdmin inizio..........");
+
+		boolean check = utenteServiceInstance.ControllaSeTraGliUtentiDisabilitatiAlmenoUnAdmin();
+
+		if (check)
+			throw new RuntimeException("testControllaSeTraGliUtentiDisabilitatiAlmenoUnAdmin FAILED");
+
+		System.out.println("..........testControllaSeTraGliUtentiDisabilitatiAlmenoUnAdmin PASSED..........");
+	}
 }
 
 //utentiCreatiAGiugno2021

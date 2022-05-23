@@ -30,6 +30,8 @@ public interface UtenteService {
 	public Long contaQuantiUtentiSonoAdmin() throws Exception;
 	
 	public List<Utente> listaDiUtentiConPasswordcConMenoDi8Caratteri() throws Exception;
+	
+	public boolean ControllaSeTraGliUtentiDisabilitatiAlmenoUnAdmin() throws Exception;
 
 	// per injection
 	public void setUtenteDAO(UtenteDAO utenteDAO);

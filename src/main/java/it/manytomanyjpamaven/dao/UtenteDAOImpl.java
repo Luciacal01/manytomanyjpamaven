@@ -90,5 +90,13 @@ public class UtenteDAOImpl implements UtenteDAO {
 		TypedQuery<Utente> query = entityManager.createQuery("From Utente where length(password)<8", Utente.class);
 		return query.getResultList();
 	}
+	
+	public boolean checkUtentiDisabilitatiandAdmin() throws Exception {
+		if (entityManager.createQuery(
+				"select count(u) from Utente u join u.ruoli r where u.stato= 'dabilitato' and r.descrizione='Administrator'",
+				Long.class).getSingleResult() >= 1)
+			return true;
+		return false;
+	}
 
 }

@@ -16,4 +16,7 @@ public interface UtenteDAO extends IBaseDAO<Utente> {
 	public Long CountAllUtentsAdmin() throws Exception;
 	
 	public List<Utente> findAllByLenghtPasswordMinoreDi8() throws Exception;
+	
+	public boolean checkUtentiDisabilitatiandAdmin() throws Exception;
+
 }
