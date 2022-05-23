@@ -255,4 +255,17 @@ public class UtenteServiceImpl implements UtenteService {
 		}
 	}
 
+	public Long contaQuantiUtentiSonoAdmin() throws Exception {
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+		try {
+			utenteDAO.setEntityManager(entityManager);
+
+			return utenteDAO.CountAllUtentsAdmin();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
+	}
 }

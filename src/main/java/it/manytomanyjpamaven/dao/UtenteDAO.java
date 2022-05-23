@@ -12,4 +12,7 @@ public interface UtenteDAO extends IBaseDAO<Utente> {
 	public Utente findByIdFetchingRuoli(Long id);
 
 	public List<Utente> findAllCreatedAtGiugno2021() throws Exception;
+
+	public Long CountAllUtentsAdmin() throws Exception;
+
 }

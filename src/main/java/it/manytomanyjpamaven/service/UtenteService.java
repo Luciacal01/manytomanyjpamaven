@@ -27,6 +27,8 @@ public interface UtenteService {
 
 	public List<Utente> CercaUtentiCreatiAGiugno2021() throws Exception;
 
+	public Long contaQuantiUtentiSonoAdmin() throws Exception;
+
 	// per injection
 	public void setUtenteDAO(UtenteDAO utenteDAO);
 

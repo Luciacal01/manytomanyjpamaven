@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.manytomanyjpamaven.dao.RuoloDAO;
 import it.manytomanyjpamaven.model.Ruolo;
+import it.manytomanyjpamaven.model.Utente;
 
 public interface RuoloService {
 	public List<Ruolo> listAll() throws Exception;

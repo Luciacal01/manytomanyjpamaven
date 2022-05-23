@@ -44,9 +44,17 @@ public class ManyToManyTest {
 
 			// deleteRuolo(ruoloServiceInstance);
 
-			testCercaUtentiDataCreazioneGiugno2021(utenteServiceInstance);
+			// testCercaUtentiDataCreazioneGiugno2021(utenteServiceInstance);
 
 			// testDeleteUtente(utenteServiceInstance);
+
+			// testContaQuantiUtentiSonoAdmin(utenteServiceInstance, ruoloServiceInstance);
+
+			// testListaDiDescrizioniDistinteDeiRuoliConUtentiAssociati(ruoloServiceInstance);
+
+			// testListaDiUtentiConPasswordcConMenoDi8Caratteri(utenteServiceInstance);
+
+			testControllaSeTraGliUtentiDisabilitatiAlmenoUnAdmin(utenteServiceInstance);
 
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -232,6 +240,28 @@ public class ManyToManyTest {
 		utenteServiceInstance.rimuovi(utenteNuovo1.getId());
 
 		System.out.println("........testCercaUtentiDataCreazioneGiugno2021 PASSED..........");
+	}
+
+	public static void testContaQuantiUtentiSonoAdmin(UtenteService utenteServiceInstance,
+			RuoloService ruoloServiceInstance) throws Exception {
+		System.out.println("............testContaQuantiUtentiSonoAdmin Inizio........");
+
+		Ruolo ruoloEsistenteSuDb = ruoloServiceInstance.cercaPerDescrizioneECodice("Administrator", "ROLE_ADMIN");
+		if (ruoloEsistenteSuDb == null)
+			throw new RuntimeException("testContaQuantiUtentiSonoAdmin fallito: ruolo inesistente ");
+
+		List<Utente> listaUtenti = utenteServiceInstance.listAll();
+		utenteServiceInstance.aggiungiRuolo(listaUtenti.get(3), ruoloEsistenteSuDb);
+
+		Utente utenteReloaded = utenteServiceInstance.caricaUtenteSingoloConRuoli(listaUtenti.get(3).getId());
+		if (utenteReloaded.getRuoli().size() != 1)
+			throw new RuntimeException("testContaQuantiUtentiSonoAdmin fallito: ruoli non aggiunti ");
+
+		Long UtentiAdmin = utenteServiceInstance.contaQuantiUtentiSonoAdmin();
+		if (UtentiAdmin != 2)
+			throw new RuntimeException("testContaQuantiUtentiSonoAdmin FAILED: gli utenti calcolati non sono giusti");
+
+		System.out.println("............testContaQuantiUtentiSonoAdmin PASSED........");
 	}
 }
 

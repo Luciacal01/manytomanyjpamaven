@@ -78,4 +78,12 @@ public class UtenteDAOImpl implements UtenteDAO {
 				.createQuery("select u from Utente u where u.dateCreated like '2021-06%'", Utente.class);
 		return query.getResultList();
 	}
+
+	public Long CountAllUtentsAdmin() throws Exception {
+		TypedQuery<Long> query = entityManager.createQuery(
+				"select count(u) from Utente u join u.ruoli r where r.codice='ROLE_ADMIN' and r.descrizione='Administrator'",
+				Long.class);
+		return query.getSingleResult();
+	}
+
 }

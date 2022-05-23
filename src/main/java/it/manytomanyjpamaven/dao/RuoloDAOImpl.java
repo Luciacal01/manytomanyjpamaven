@@ -5,6 +5,11 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import org.hibernate.SQLQuery;
+
+import com.mysql.cj.Query;
+import com.mysql.cj.Session;
+
 import it.manytomanyjpamaven.model.Ruolo;
 
 public class RuoloDAOImpl implements RuoloDAO {
