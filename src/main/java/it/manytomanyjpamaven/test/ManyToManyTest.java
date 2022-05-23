@@ -29,30 +29,29 @@ public class ManyToManyTest {
 
 			System.out.println("In tabella Utente ci sono " + utenteServiceInstance.listAll().size() + " elementi.");
 
-			// testInserisciNuovoUtente(utenteServiceInstance);
+			testInserisciNuovoUtente(utenteServiceInstance);
 			System.out.println("In tabella Utente ci sono " + utenteServiceInstance.listAll().size() + " elementi.");
 
-			// testCollegaUtenteARuoloEsistente(ruoloServiceInstance,
-			// utenteServiceInstance);
+			testCollegaUtenteARuoloEsistente(ruoloServiceInstance,utenteServiceInstance);
 			System.out.println("In tabella Utente ci sono " + utenteServiceInstance.listAll().size() + " elementi.");
 
-			// testModificaStatoUtente(utenteServiceInstance);
+			testModificaStatoUtente(utenteServiceInstance);
 			System.out.println("In tabella Utente ci sono " + utenteServiceInstance.listAll().size() + " elementi.");
 
-			// testRimuoviRuoloDaUtente(ruoloServiceInstance, utenteServiceInstance);
+			testRimuoviRuoloDaUtente(ruoloServiceInstance, utenteServiceInstance);
 			System.out.println("In tabella Utente ci sono " + utenteServiceInstance.listAll().size() + " elementi.");
 
-			// deleteRuolo(ruoloServiceInstance);
+			deleteRuolo(ruoloServiceInstance);
 
-			// testCercaUtentiDataCreazioneGiugno2021(utenteServiceInstance);
+			testCercaUtentiDataCreazioneGiugno2021(utenteServiceInstance);
 
-			// testDeleteUtente(utenteServiceInstance);
+			testDeleteUtente(utenteServiceInstance);
 
-			// testContaQuantiUtentiSonoAdmin(utenteServiceInstance, ruoloServiceInstance);
+			testContaQuantiUtentiSonoAdmin(utenteServiceInstance, ruoloServiceInstance);
 
-			// testListaDiDescrizioniDistinteDeiRuoliConUtentiAssociati(ruoloServiceInstance);
+			testListaDiDescrizioniDistinteDeiRuoliConUtentiAssociati(ruoloServiceInstance);
 
-			// testListaDiUtentiConPasswordcConMenoDi8Caratteri(utenteServiceInstance);
+			testListaDiUtentiConPasswordcConMenoDi8Caratteri(utenteServiceInstance);
 
 			testControllaSeTraGliUtentiDisabilitatiAlmenoUnAdmin(utenteServiceInstance);
 
@@ -262,6 +261,18 @@ public class ManyToManyTest {
 			throw new RuntimeException("testContaQuantiUtentiSonoAdmin FAILED: gli utenti calcolati non sono giusti");
 
 		System.out.println("............testContaQuantiUtentiSonoAdmin PASSED........");
+	}
+	
+	public static void testListaDiUtentiConPasswordcConMenoDi8Caratteri(UtenteService utenteServiceInstance)
+			throws Exception {
+		System.out.println("........testListaDiUtentiConPasswordcConMenoDi8Caratteri inizio.......");
+
+		List<Utente> listaUtentiConPassword = utenteServiceInstance.listaDiUtentiConPasswordcConMenoDi8Caratteri();
+
+		if (listaUtentiConPassword.size() != 5)
+			throw new RuntimeException("testListaDiUtentiConPasswordcConMenoDi8Caratteri FAILED");
+
+		System.out.println("........testListaDiUtentiConPasswordcConMenoDi8Caratteri PASSED........");
 	}
 }
 

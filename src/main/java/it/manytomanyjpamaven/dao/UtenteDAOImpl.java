@@ -85,5 +85,10 @@ public class UtenteDAOImpl implements UtenteDAO {
 				Long.class);
 		return query.getSingleResult();
 	}
+	
+	public List<Utente> findAllByLenghtPasswordMinoreDi8() throws Exception {
+		TypedQuery<Utente> query = entityManager.createQuery("From Utente where length(password)<8", Utente.class);
+		return query.getResultList();
+	}
 
 }
